@@ -15,8 +15,8 @@ class Contest(models.Model):
     #problem_list = ArrayField(models.IntegerField()) # problems_ids  
     #is_solved = ArrayField(ArrayField(models.BooleanField(default=False)))  # a specific problem is solved by a specific user or not..?
     #incorrect_attempt = ArrayField(ArrayField(models.IntegerField(default=0))) # how many times an user (wrong)attempt a specific problem ?
-    solved = ArrayField(models.IntegerField(default=0))  #  total solved by a specific user
-    penalty = ArrayField(models.IntegerField(default=0))  #  total penalty for a specific user
+    #solved = ArrayField(models.IntegerField(default=0))  #  total solved by a specific user
+    #penalty = ArrayField(models.IntegerField(default=0))  #  total penalty for a specific user
     start_time = models.DateTimeField(null=True) 
     end_time = models.DateTimeField(null=True)
     
@@ -25,5 +25,13 @@ class Contest(models.Model):
         return str(self.id) + '. ' + self.title
 
 
+class ContestParticipants(models.Model):
+    contestant=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    contest_id=models.ForeignKey(Contest,on_delete=models.CASCADE)
+    problem_list=ArrayField(models.BooleanField(default=False))
+    penalty=models.IntegerField(default=0)
+    solved=models.IntegerField(default=0)
 
+    def __str__(self):
+        return 'User_id:'+str(self.user)+' contest_id:'+self.contest
 
