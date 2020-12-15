@@ -9,7 +9,7 @@ def path_to_save(instance, filename):
 
 
 class Problem(models.Model):
-    contest=models.ForeignKey(Contest,default=1,on_delete=models.CASCADE)
+    contest=models.ForeignKey(Contest,on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=False)
     difficulty = models.CharField(max_length=100)
     tags = models.CharField(max_length=100)
@@ -22,7 +22,9 @@ class Problem(models.Model):
     output_file = models.FileField(upload_to=path_to_save)
     no_of_submissions = models.IntegerField(default=0)
     no_of_accepted = models.IntegerField(default=0)
-
+    contest_time_submissions = models.IntegerField(default=0)
+    contest_time_AC=models.IntegerField(default=0)
+    protected=models.BooleanField(default=True)
     def __str__(self):
         return str(self.id) + '. ' + self.title
 

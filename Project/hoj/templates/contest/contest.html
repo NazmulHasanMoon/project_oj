@@ -39,21 +39,17 @@
     <p style=" font-size:20px;" align="center"> {{contest.title}} </p>
     <table class="table table-sm table-striped table-bordered w-auto" align = "center">
      <tr>
-      <td align="center"><b> Problem Name </b> </td>
-      <th> Total Attempt </th>
-      <th> Total Solved </th>
+      <th align="center"> Problem Name </th>
+      <th align="center"> Total Attempt </th>
+      <th align="center"> Total Solved </th>
     </tr>
-    <ol>
     {% for problem in contest.problem_set.all %}
     <tr>
-      <li>
-      <td> <font color="#f4f4f4">_</font>  <a href="{% url 'cont_problem' contest.id prob1.id %}" style="text-decoration: none">  {{problem.title}} <font color="#f4f4f4">_______________</font> </a> </td>
-      <td align="center"> 0 </td>
-      <td align="center"> 0 </td>
-    </li>
+      <td> <font color="#f4f4f4">_</font> {{forloop.counter}} <a href="{% url 'cont_problem' contest.id problem.id %}" style="text-decoration: none">  {{problem.title}} <font color="#f4f4f4">_______________</font> </a> </td>
+      <td align="center"> {{problem.contest_time_submissions}} </td>
+      <td align="center"> {{problem.contest_time_AC}} </td>
     </tr>
      {% endfor %}
-    </ol>
     </table>
     
      </td>

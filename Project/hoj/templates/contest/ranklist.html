@@ -16,21 +16,33 @@
 <table class="table table-sm table-striped table-bordered w-auto" align="center">
   <thead>
     <tr>
-      <td align="center"> <b> Rank </b> </td>
-      <td align="center"> <b> User </b> </td>
-      <td align="center"> <b> Total Solved </b> </td>
-      <td align="center"> <b> A </b> </td>
-      <td align="center"> <b> B </b> </td>
-      <td align='center'> <b> C </b> </td>
-      <td align='center'> <b> D </b> </td>
-      <td align='center'> <b> E </b> </td>
+      <th align="center"> Rank </th>
+      <th align="center"> User </th>
+      <th align="center"> Total Solved </th>
+      <th align="center"> Penalty </th>
+      {% for problem in contest.problem_set.all %}
+        <th align="center"> {{forloop.counter}}.{{problem.title}} </th>
+      {% endfor %}
     </tr>
   </thead>
     <tbody>
-    
-  </tbody>
+        <tr>
+          {% for status in standings %}
+            <td>{{forloop.counter}}</td>
+            <td> {{status.contestant.username}}</td>
+            <td> {{status.solved}}</td>
+            <td> {{status.penalty_time}}</td>
+            {% for prob in contest.problem_set.all %}
+              <th align="center">
+              {% for flag in problem_list %}
+                {% if prob.id==flag.problemid and status.contestant==flag.user%}
+                     {{falg.status}}
+                {% endifequal %}
+              {% endfor %}
+               </th>
+            {% endfor %}
+          {% endfor %}
+        </tr>
+    </tbody>
 </table>
 {% endblock %}
-
-
-

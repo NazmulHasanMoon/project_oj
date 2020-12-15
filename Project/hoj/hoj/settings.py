@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'submission',
     'resources',
     'contest',
+    'contestant',
 ]
 
 MIDDLEWARE = [
@@ -84,9 +85,9 @@ WSGI_APPLICATION = 'hoj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
-        'USER': 'projectuser',
-        'PASSWORD': 'hoj',
+        'NAME': 'test',
+        'USER': 'testing',
+        'PASSWORD': 'test',
         'HOST': 'localhost',
         'PORT': '',
     }

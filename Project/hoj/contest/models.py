@@ -3,7 +3,7 @@ from user.models import CustomUser
 from django.contrib.postgres.fields import ArrayField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
-
+from django.utils.timezone import now
 
 class Contest(models.Model):
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -25,13 +25,13 @@ class Contest(models.Model):
         return str(self.id) + '. ' + self.title
 
 
-class ContestParticipants(models.Model):
+class ContestParticipant(models.Model):
     contestant=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    contest_id=models.ForeignKey(Contest,on_delete=models.CASCADE)
-    problem_list=ArrayField(models.BooleanField(default=False))
-    penalty=models.IntegerField(default=0)
-    solved=models.IntegerField(default=0)
+    contestid=models.ForeignKey(Contest,on_delete=models.CASCADE)
+    #problem_list=ArrayField(models.BooleanField(default=False))
+    penalty=models.IntegerField(default=0,null=True)
+    solved=models.IntegerField(default=0,null=True)
+    penalty_time=models.DateTimeField(default=timezone.now()-timezone.now(),null=True)
 
     def __str__(self):
-        return 'User_id:'+str(self.user)+' contest_id:'+self.contest
-
+        return 'User_id:'+str(self.contestant)+' contest_id:'+ str(self.contest)

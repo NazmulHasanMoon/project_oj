@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contest,ContestParticipants
+from .models import Contest,ContestParticipant
 from problem.models import Problem
 
 class ProblemInline(admin.StackedInline):
@@ -15,4 +15,4 @@ class ContestAdmin(admin.ModelAdmin):
 	inlines = [ProblemInline]
 	
 admin.site.register(Contest,ContestAdmin)
-admin.site.register(ContestParticipants)
+admin.site.register(ContestParticipant)
