@@ -78,9 +78,9 @@ def cont_problem(request, cid, pid):
             code.save()
             problem.save()
             current_user.save()
-            print(current_user.id , problem.id)
-            obj=ContestParticipant.objects.get_or_create(contestant__id=request.user.id ,contestid__id=contest.id)
-            ob2=ProblemTry.objects.get_or_create(user__id=request.user.id , part__id=obj.id, problemid__id=problem.id)
+            #print(current_user.id , problem.id)
+            obj=ContestParticipant.objects.get_or_create(contestant=request.user ,contestid=contest)
+            ob2=ProblemTry.objects.get_or_create(user=request.user , part=obj , problemid=problem)
             if(code.verdict==1 and obj2.status==False):
                 obj2.status=True
                 obj.solved+=1

@@ -35,9 +35,9 @@
             {% for prob in contest.problem_set.all %}
               <th align="center">
               {% for flag in problem_list %}
-                {% if prob.id==flag.problemid and status.contestant==flag.user%}
+                {% if prob.id == flag.problemid.id and status.contestant.id == flag.user.id%}
                      {{falg.status}}
-                {% endifequal %}
+                {% endif %}
               {% endfor %}
                </th>
             {% endfor %}
