@@ -28,10 +28,10 @@ class Contest(models.Model):
 class ContestParticipant(models.Model):
     contestant=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     contestid=models.ForeignKey(Contest,on_delete=models.CASCADE)
-    #problem_list=ArrayField(models.BooleanField(default=False))
+    #problem_list=ArrayField(models.BooleanField(default=False),size=50,default=False)
     penalty=models.IntegerField(default=0,null=True)
     solved=models.IntegerField(default=0,null=True)
-    penalty_time=models.DateTimeField(default=timezone.now()-timezone.now(),null=True)
+    penalty_time=models.DateTimeField(null=True,blank=True)
 
     def __str__(self):
-        return 'User_id:'+str(self.contestant)+' contest_id:'+ str(self.contest)
+        return 'User_id:'+str(self.contestant.id)+' contest_id:'+ str(self.contestid.id)

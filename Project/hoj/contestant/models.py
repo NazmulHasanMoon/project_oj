@@ -8,9 +8,9 @@ from problem.models import Problem
 
 class ProblemTry(models.Model):
     user=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    part=models.ForeignKey(ContestParticipant,on_delete=models.CASCADE)
-    problemid=models.ForeignKey(Problem,on_delete=models.CASCADE)
+    part=models.ForeignKey(ContestParticipant,default=1,on_delete=models.CASCADE)
+    prob=models.ForeignKey(Problem,default=1,on_delete=models.CASCADE)
     status=models.BooleanField(default=False,null=True)
 
     def __str__(self):
-        return str(self.user)+ str(self.part) + str(self.problemid)+str(self.status)
+        return str(self.user.id)+ str(self.part.id) + str(self.prob.id)+str(self.status)

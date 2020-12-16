@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'hoj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test',
-        'USER': 'testing',
-        'PASSWORD': 'test',
+        'NAME': 'hoj',
+        'USER': 'hstu',
+        'PASSWORD': 'arena',
         'HOST': 'localhost',
         'PORT': '',
     }

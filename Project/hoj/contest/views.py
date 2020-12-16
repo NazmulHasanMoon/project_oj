@@ -79,13 +79,15 @@ def cont_problem(request, cid, pid):
             problem.save()
             current_user.save()
             #print(current_user.id , problem.id)
-            obj=ContestParticipant.objects.get_or_create(contestant=request.user ,contestid=contest)
-            ob2=ProblemTry.objects.get_or_create(user=request.user , part=obj , problemid=problem)
+            obj,created =ContestParticipant.objects.get_or_create(contestant=request.user ,contestid=contest,defaults={'penalty_time':timezone.now(),'penalty':0,'solved':0})
+            obj2,created =ProblemTry.objects.get_or_create(user=request.user , part=obj, prob=problem,defaults={'status':False})
+            #print(obj.id)
+            #print("Hello")
             if(code.verdict==1 and obj2.status==False):
                 obj2.status=True
                 obj.solved+=1
                 if(obj.penalty > 0):
-                    obj.penalty_time+=(timezone.now()+timezone.timedelta(0,1200*obj.penalty)-contest.start_time)
+                    obj.penalty_time=(timezone.now()+timezone.timedelta(0,1200*obj.penalty)-contest.start_time)
             else:
                 obj.penalty+=1
             
@@ -105,7 +107,7 @@ def cont_problem(request, cid, pid):
 def contest_standings(request, cid):
     standings = ContestParticipant.objects.filter(contestid = cid).order_by('-solved','penalty_time')
     #print(contest)
-    problem_list=ProblemTry.objects.filter(part=standings)
     contest=Contest.objects.get(id=cid)
-    context = { 'standings':standings,'contest': contest,'problem_list':problem_list }
+    number_of_problem=contest.problem_set.count()-1
+    context = { 'standings':standings,'contest': contest,'nop':number_of_problem }
     return render(request, 'contest/ranklist.html', context)
